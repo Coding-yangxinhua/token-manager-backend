@@ -46,7 +46,10 @@ public class TmGameUserServiceImpl extends ServiceImpl<TmGameUserMapper, TmGameU
         Long gameId = tmGame.getId();
         String token = gameUserVo.getToken();
         // 如果返回的值是error token的，用当前已激活的token代替
-        if (tmGame.getErrorToken().equals(token) || token.equals("{}")) {
+        if (token.equals("{}")) {
+            return token;
+        }
+        if (tmGame.getErrorToken().equals(token)) {
             TmGameUser enableUser = getEnableUserToken(gameId);
             if (enableUser != null) {
                 return enableUser.getToken();
