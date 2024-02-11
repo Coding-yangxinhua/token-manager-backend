@@ -49,7 +49,7 @@ public class TmGameUserServiceImpl extends ServiceImpl<TmGameUserMapper, TmGameU
         if (token.equals("{}")) {
             return token;
         }
-        if (tmGame.getErrorToken().equals(token)) {
+        if (tmGame.getErrorToken().equals(token) || token.contains("focus")) {
             TmGameUser enableUser = getEnableUserToken(gameId);
             if (enableUser != null) {
                 return enableUser.getToken();
